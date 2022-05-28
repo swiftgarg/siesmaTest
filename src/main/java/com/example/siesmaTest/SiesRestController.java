@@ -3,7 +3,14 @@ package com.example.siesmaTest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 @RestController
 public class SiesRestController {
@@ -13,10 +20,10 @@ public class SiesRestController {
    static final double[] SLAB_TAX_CONS = new double[]{0,0,3572,19822,54232};
 
 
-@GetMapping("/helloyello")
+/*@GetMapping("/helloyello")
 public String helloWorld(){
     return "Hello Yello";
-}
+}*/
 
 
     @RequestMapping(value = "/CalcTaxOfEmployees", //
@@ -38,10 +45,19 @@ public String helloWorld(){
 
                     emp.setIncomeTax(emp.getIncomeTax() + SLAB_TAX_CONS[j]);
 
-                    emp.setGrossIncome(emp.getPaymentMonth()*(emp.getAnnualSalary()/12));
-                    emp.setIncomeTax((emp.getIncomeTax()/12)*emp.getPaymentMonth());
-                    emp.setNetIncome(emp.getGrossIncome()-emp.getIncomeTax());
-                    emp.setSuperannuation(emp.getGrossIncome()* emp.getSuperRate());
+                    emp.setGrossIncome(Math.round(emp.getPaymentMonth()*(emp.getAnnualSalary()/12)));
+                    emp.setIncomeTax(Math.round((emp.getIncomeTax()/12)*emp.getPaymentMonth()));
+                    emp.setNetIncome(Math.round(emp.getGrossIncome()-emp.getIncomeTax()));
+                    emp.setSuperannuation(Math.round(emp.getGrossIncome()* emp.getSuperRate()));
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+                    Date lastDayOfMonth = cal.getTime();
+                    emp.setToDate(lastDayOfMonth);
+                    cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
+                    Date firstDayOfMonth = cal.getTime();
+                    emp.setFromDate(firstDayOfMonth);
+
 
 
                     break;

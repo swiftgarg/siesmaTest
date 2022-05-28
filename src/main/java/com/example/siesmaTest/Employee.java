@@ -6,7 +6,7 @@ public class Employee extends TaxPOJO {
     private double annualSalary;
     private int paymentMonth;
     private float superRate;
-    public TaxPOJO taxDetails;
+    //public TaxPOJO taxDetails;
 
     public Employee(String firstName, String lastName, double annualSalary, int paymentMonth, float superRate, TaxPOJO taxDetails) {
         this.firstName = firstName;
@@ -57,11 +57,9 @@ public class Employee extends TaxPOJO {
         this.paymentMonth = paymentMonth;
     }
 
-  
 
-    public void setTaxDetails(TaxPOJO taxDetails) {
-        this.taxDetails = taxDetails;
-    }
+
+
 
     @Override
     public String toString() {
