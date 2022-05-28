@@ -8,7 +8,7 @@ public class Employee extends TaxPOJO {
     private float superRate;
     //public TaxPOJO taxDetails;
 
-    public Employee(String firstName, String lastName, double annualSalary, int paymentMonth, float superRate, TaxPOJO taxDetails) {
+    public Employee(String firstName, String lastName, double annualSalary, int paymentMonth, float superRate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualSalary = annualSalary;
