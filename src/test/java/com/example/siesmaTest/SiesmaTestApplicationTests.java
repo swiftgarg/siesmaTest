@@ -9,11 +9,18 @@ import org.springframework.util.Assert;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
 
 @SpringBootTest
 class SiesmaTestApplicationTests {
 
 	SiesRestController restControllerForTest = new SiesRestController();
+	static final int[] SLAB_LIMIT_ARRAY = new int[]{0,18200,37000,87000,180000};
+	static final double[] SLAB_TAX_ARRAY= new double[]{0,0.19,0.325,0.37,0.45};
+
+	static final double[] SLAB_TAX_CONS = new double[]{0,0,3572,19822,54232};
 
 	public ArrayList<Employee> setDummyValuesForTest() {
 		ArrayList<Employee> tempEmps = new ArrayList<Employee>();
@@ -61,5 +68,53 @@ class SiesmaTestApplicationTests {
 		Assertions.assertEquals("Chen",employeesWithTax.get(1).getLastName());
 
 	}
+
+	@Test
+	void testOfTheTests(){
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		ArrayList<Employee> employeesWithTaxNewCalc = new ArrayList<Employee>();
+		employeesWithTaxNewCalc = newCalcToCalculateTaxOfEmployees(setDummyValuesForTest());
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertEquals(employeesWithTax.get(1).getIncomeTax(), employeesWithTaxNewCalc.get(1).getIncomeTax());
+
+	}
+
+	private ArrayList<Employee> newCalcToCalculateTaxOfEmployees(ArrayList<Employee> valuesForTest) {
+
+
+		for (Employee emp : valuesForTest
+		) {
+			int j = 0;
+			while (emp.getAnnualSalary() > SLAB_LIMIT_ARRAY[j]) {
+				j++;
+			}
+		if(SLAB_LIMIT_ARRAY[j-1]==0)
+				emp.setIncomeTax(0);
+		else {
+			emp.setIncomeTax(emp.getIncomeTax() + ((emp.getAnnualSalary() - SLAB_LIMIT_ARRAY[j - 1]) * SLAB_TAX_ARRAY[j - 1]));
+			emp.setIncomeTax(emp.getIncomeTax() + SLAB_TAX_CONS[j - 1]);
+		}
+
+
+
+		emp.setGrossIncome(Math.round(emp.getPaymentMonth() * (emp.getAnnualSalary() / 12)));
+		emp.setIncomeTax(Math.round((emp.getIncomeTax() / 12) * emp.getPaymentMonth()));
+		emp.setNetIncome(Math.round(emp.getGrossIncome() - emp.getIncomeTax()));
+		emp.setSuperannuation(Math.round(emp.getGrossIncome() * emp.getSuperRate()));
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
+		Date firstDayOfMonth = cal.getTime();
+		emp.setFromDate(firstDayOfMonth);
+		cal.set(Calendar.DATE, emp.getPaymentMonth() * cal.getActualMaximum(Calendar.DATE));//confirm i am multiplying the payment months with days what if feb
+		Date lastDayOfMonth = cal.getTime();
+		emp.setToDate(lastDayOfMonth);
+
+	}
+
+		return valuesForTest;
+
+	}
+
 
 }
