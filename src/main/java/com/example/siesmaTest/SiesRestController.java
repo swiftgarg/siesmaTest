@@ -13,6 +13,10 @@ public class SiesRestController {
    static final double[] SLAB_TAX_CONS = new double[]{0,0,3572,19822,54232};
 
 
+@GetMapping("/helloyello")
+public String helloWorld(){
+    return "Hello Yello";
+}
 
 
     @RequestMapping(value = "/CalcTaxOfEmployees", //
@@ -20,7 +24,7 @@ public class SiesRestController {
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    public double calculateTaxOfEmployees(@RequestBody ArrayList<Employee> emps) {
+    public ArrayList<Employee> calculateTaxOfEmployees(@RequestBody ArrayList<Employee> emps) {
 
 
 
@@ -33,7 +37,14 @@ public class SiesRestController {
                     emp.setIncomeTax(emp.getIncomeTax() + ((emp.getAnnualSalary()-SLAB_LIMIT_ARRAY[j])*SLAB_TAX_ARRAY[j]));
 
                     emp.setIncomeTax(emp.getIncomeTax() + SLAB_TAX_CONS[j]);
-                    return emp.getIncomeTax();
+
+                    emp.setGrossIncome(emp.getPaymentMonth()*(emp.getAnnualSalary()/12));
+                    emp.setIncomeTax((emp.getIncomeTax()/12)*emp.getPaymentMonth());
+                    emp.setNetIncome(emp.getGrossIncome()-emp.getIncomeTax());
+                    emp.setSuperannuation(emp.getGrossIncome()* emp.getSuperRate());
+
+
+                    break;
                     } j--;
                 }
 
@@ -46,7 +57,7 @@ public class SiesRestController {
 
 
 
-        return 0;
+        return emps;
     }
 
 }

@@ -6,7 +6,7 @@ public class Employee extends TaxPOJO {
     private double annualSalary;
     private int paymentMonth;
     private float superRate;
-    public TaxPOJO taxDetails = new TaxPOJO();
+    public TaxPOJO taxDetails;
 
     public Employee(String firstName, String lastName, double annualSalary, int paymentMonth, float superRate, TaxPOJO taxDetails) {
         this.firstName = firstName;
@@ -14,6 +14,7 @@ public class Employee extends TaxPOJO {
         this.annualSalary = annualSalary;
         this.paymentMonth = paymentMonth;
         this.superRate = superRate;
+
     }
 
     public float getSuperRate() {
@@ -56,6 +57,12 @@ public class Employee extends TaxPOJO {
         this.paymentMonth = paymentMonth;
     }
 
+  
+
+    public void setTaxDetails(TaxPOJO taxDetails) {
+        this.taxDetails = taxDetails;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -64,6 +71,7 @@ public class Employee extends TaxPOJO {
                 ", annualSalary=" + annualSalary +
                 ", paymentMonth=" + paymentMonth +
                 ", superRate=" + superRate +
+
                 '}';
     }
 }

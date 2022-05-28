@@ -66,15 +66,5 @@ private double netIncome;
         this.netIncome = netIncome;
     }
 
-    @Override
-    public String toString() {
-        return "TaxPOJO{" +
-                "fromDate=" + fromDate +
-                ", toDate=" + toDate +
-                ", grossIncome=" + grossIncome +
-                ", incomeTax=" + incomeTax +
-                ", superannuation=" + superannuation +
-                ", netIncome=" + netIncome +
-                '}';
-    }
+
 }
