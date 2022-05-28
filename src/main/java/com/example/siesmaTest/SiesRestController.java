@@ -51,12 +51,12 @@ public String helloWorld(){
                     emp.setSuperannuation(Math.round(emp.getGrossIncome()* emp.getSuperRate()));
 
                     Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-                    Date lastDayOfMonth = cal.getTime();
-                    emp.setToDate(lastDayOfMonth);
                     cal.set(Calendar.DATE, cal.getActualMinimum(Calendar.DATE));
                     Date firstDayOfMonth = cal.getTime();
                     emp.setFromDate(firstDayOfMonth);
+                    cal.set(Calendar.DATE, emp.getPaymentMonth()*cal.getActualMaximum(Calendar.DATE));//confirm i am multiplying the payment months with days what if feb
+                    Date lastDayOfMonth = cal.getTime();
+                    emp.setToDate(lastDayOfMonth);
 
 
 
