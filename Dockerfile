@@ -1,5 +1,5 @@
 ######### IMAGE BUILD ############
-FROM maven:3.8.5-amazoncorretto-17 AS MAVEN_BUILD
+FROM maven:3.8.5-amazoncorretto-11 AS MAVEN_BUILD
 
 COPY pom.xml /build/
 COPY src /build/src/
@@ -9,7 +9,7 @@ RUN mvn package
 
 ######### PROD IMAGE ARTIFACT COPY #############
 
-FROM amazoncorretto:17
+FROM amazoncorretto:11
 
 WORKDIR /app
 
