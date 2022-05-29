@@ -19,7 +19,7 @@ public class SiesRestController {
 
 
 
-    @RequestMapping(value = "/CalcTaxOfEmployees", //
+    @RequestMapping(value = "/calcTaxOfEmployees", //
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
