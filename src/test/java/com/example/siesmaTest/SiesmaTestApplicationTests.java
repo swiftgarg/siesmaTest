@@ -1,17 +1,13 @@
 package com.example.siesmaTest;
 
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
-
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 @SpringBootTest
 class SiesmaTestApplicationTests {
@@ -50,7 +46,7 @@ class SiesmaTestApplicationTests {
 	void testSuperannuationCalculation(){
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
-		Assertions.assertEquals(1000.0,employeesWithTax.get(1).getSuperannuation());
+		Assertions.assertEquals(1000.0,employeesWithTax.get(1).getSuperannuation());//asserting superannuation of user 2
 
 	}
 

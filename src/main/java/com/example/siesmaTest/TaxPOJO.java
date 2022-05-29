@@ -9,7 +9,7 @@ private double grossIncome;
 private double incomeTax;
 private double superannuation;
 private double netIncome;
-
+// Tax Object
 
     public TaxPOJO() {
         this.grossIncome = 0;
