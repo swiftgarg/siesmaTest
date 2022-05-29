@@ -84,15 +84,18 @@ class SiesmaTestApplicationTests {
 
 		for (Employee emp : valuesForTest
 		) {
+
+			//another way to claculate same would be to start array from 1st index as here and trying to find the slab
+			//which the individual passes
 			int j = 0;
 			while (emp.getAnnualSalary() > SLAB_LIMIT_ARRAY[j]) {
 				j++;
 			}
-		if(SLAB_LIMIT_ARRAY[j-1]==0)
+		if(SLAB_LIMIT_ARRAY[j-1]==0)//and we see if slab is 0, we set income tax as 0
 				emp.setIncomeTax(0);
-		else {
+		else {//else we compute tax on money other than passed slab(which will be j-1 here)
 			emp.setIncomeTax(emp.getIncomeTax() + ((emp.getAnnualSalary() - SLAB_LIMIT_ARRAY[j - 1]) * SLAB_TAX_ARRAY[j - 1]));
-			emp.setIncomeTax(emp.getIncomeTax() + SLAB_TAX_CONS[j - 1]);
+			emp.setIncomeTax(emp.getIncomeTax() + SLAB_TAX_CONS[j - 1]);//and adding constant tax slab of passed slab
 		}
 
 
