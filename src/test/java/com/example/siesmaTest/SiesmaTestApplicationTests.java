@@ -1,10 +1,14 @@
 package com.example.siesmaTest;
 
 
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.textract.model.transform.S3ObjectJsonUnmarshaller;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +27,17 @@ class SiesmaTestApplicationTests {
 		tempEmps.add(new Employee("David", "Rudd", 60050.0, 1, (float) 0.09));
 		tempEmps.add(new Employee("Ryan", "Chen", 120000.0, 1, (float) 0.1));
 	return tempEmps;
+	}
+
+	SiesmaS3Connector siesmaS3Connector = new SiesmaS3Connector();
+
+	@Test
+	void testS3Connection() throws IOException {
+		TaxSlabPOJO s3ObjectJsonUnmarshaller =  siesmaS3Connector.s3Connector();
+		TaxSlabPOJO s3ObjectJsonUnmarshaller2 =  siesmaS3Connector.s3Connector();
+		TaxSlabPOJO s3ObjectJsonUnmarshaller3 =  siesmaS3Connector.s3Connector();
+		Assertions.assertEquals(s3ObjectJsonUnmarshaller,s3ObjectJsonUnmarshaller3);
+
 	}
 
 

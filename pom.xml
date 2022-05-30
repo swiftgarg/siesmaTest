@@ -15,9 +15,21 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<jackson.version>2.4.4</jackson.version>
 	</properties>
-	<dependencies>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.529</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
