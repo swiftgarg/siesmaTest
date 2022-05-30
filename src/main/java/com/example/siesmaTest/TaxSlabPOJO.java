@@ -25,19 +25,54 @@ public class TaxSlabPOJO{
 
 
 
-    public static ArrayList<TaxSlabPOJO> serealizeTaxSlabs(String TaxSlabJSONPath){
+    public static ArrayList<TaxSlabPOJO> serealizeTaxSlabs(){
         Gson gson = new Gson();
         ArrayList<TaxSlabPOJO> outputList = null;
         Type listOfTaxSlabs = new TypeToken<ArrayList<TaxSlabPOJO>>() {}.getType();
 
         // Read Slab config from file
-        try (Reader reader = new FileReader(TaxSlabJSONPath)) {
-            // Convert JSON File to Java Object
-            outputList = gson.fromJson(reader, listOfTaxSlabs);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try (Reader reader = new FileReader(TaxSlabJSONPath)) {
+//            // Convert JSON File to Java Object
+//            outputList = gson.fromJson(reader, listOfTaxSlabs);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
+
+    String taxSlabsString = "[\n" +
+            "  {\n" +
+            "    \"slab-min\": 0,\n" +
+            "    \"slab-max\": 18200,\n" +
+            "    \"unit-tax\": 0,\n" +
+            "    \"slab-base-tax\": 0\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"slab-min\": 18201,\n" +
+            "    \"slab-max\": 37000,\n" +
+            "    \"unit-tax\": 0.19,\n" +
+            "    \"slab-base-tax\": 0\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"slab-min\": 37001,\n" +
+            "    \"slab-max\": 87000,\n" +
+            "    \"unit-tax\": 0.325,\n" +
+            "    \"slab-base-tax\": 3572\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"slab-min\": 87001,\n" +
+            "    \"slab-max\": 180000,\n" +
+            "    \"unit-tax\": 19822,\n" +
+            "    \"slab-base-tax\": 0.37\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"slab-min\": 180000,\n" +
+            "    \"slab-max\": 1e500,\n" +
+            "    \"unit-tax\": 0,\n" +
+            "    \"slab-base-tax\": 0\n" +
+            "  }\n" +
+            "]";
+
+        outputList = gson.fromJson(taxSlabsString, listOfTaxSlabs);
         assert(outputList != null);
         return  outputList;
     }
