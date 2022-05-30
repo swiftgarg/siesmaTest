@@ -1,5 +1,14 @@
 package com.example.siesmaTest;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class TaxSlabPOJO{
     private double slabMin;
     private double slabMax;
@@ -13,6 +22,25 @@ public class TaxSlabPOJO{
         this.slabBaseTax = slabBaseTax;
     }
 
+
+
+
+    public static ArrayList<TaxSlabPOJO> serealizeTaxSlabs(String TaxSlabJSONPath){
+        Gson gson = new Gson();
+        ArrayList<TaxSlabPOJO> outputList = null;
+        Type listOfTaxSlabs = new TypeToken<ArrayList<TaxSlabPOJO>>() {}.getType();
+
+        // Read Slab config from file
+        try (Reader reader = new FileReader(TaxSlabJSONPath)) {
+            // Convert JSON File to Java Object
+            outputList = gson.fromJson(reader, listOfTaxSlabs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assert(outputList != null);
+        return  outputList;
+    }
     public double getSlabBaseTax() {
         return slabBaseTax;
     }

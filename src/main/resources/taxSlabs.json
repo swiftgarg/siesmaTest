@@ -1,0 +1,32 @@
+[
+  {
+    "slab-min": 0,
+    "slab-max": 18200,
+    "unit-tax": 0,
+    "slab-base-tax": 0
+  },
+  {
+    "slab-min": 18201,
+    "slab-max": 37000,
+    "unit-tax": 0.19,
+    "slab-base-tax": 0
+  },
+  {
+    "slab-min": 37001,
+    "slab-max": 87000,
+    "unit-tax": 0.325,
+    "slab-base-tax": 3572
+  },
+  {
+    "slab-min": 87001,
+    "slab-max": 180000,
+    "unit-tax": 19822,
+    "slab-base-tax": 0.37
+  },
+  {
+    "slab-min": 180000,
+    "slab-max": 1e500,
+    "unit-tax": 0,
+    "slab-base-tax": 0
+  }
+]
