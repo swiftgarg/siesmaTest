@@ -32,6 +32,7 @@ public class TaxSlabPOJO{
 
         outputList = gson.fromJson(taxSlabsString, listOfTaxSlabs);
         assert(outputList != null);
+        outputList.get(outputList.size()-1).setSlabMax(Double.MAX_VALUE);
         return  outputList;
     }
     public double getSlabBaseTax() {
