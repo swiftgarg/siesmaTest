@@ -9,6 +9,14 @@
             "image": "ecs-siesma-repository:00000",
             "resourceRequirements": null,
             "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group" : "ecsSiesmaTest",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
             "portMappings": [
                 {
                     "containerPort": "8080",
