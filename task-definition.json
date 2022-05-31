@@ -31,7 +31,7 @@
     "memory": "512",
     "cpu": "256",
     "executionRoleArn": "arn:aws:iam::286788453836:role/ecs-siesma-execution-role",
+    "taskRoleArn": "arn:aws:iam::286788453836:role/siesmaECSCdkStack-ecssiesmataskdefinitionTaskRoleC-F9ZHFRTE619T",
     "family": "ecs-siesma-task-definition",
-    "taskRoleArn": "",
     "placementConstraints": []
 }
