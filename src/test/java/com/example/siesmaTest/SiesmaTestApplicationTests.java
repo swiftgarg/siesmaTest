@@ -41,7 +41,7 @@ class SiesmaTestApplicationTests {
 
 
 	@Test
-	void testIncomeTaxCalculation(){
+	void testIncomeTaxCalculation() throws IOException, ClassNotFoundException {
 	ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 	employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 	Assertions.assertEquals(2669.0,employeesWithTax.get(1).getIncomeTax());
@@ -49,7 +49,7 @@ class SiesmaTestApplicationTests {
 	}
 
 	@Test
-	void testNetIncomeCalculation(){
+	void testNetIncomeCalculation() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 		Assertions.assertEquals(7331.0,employeesWithTax.get(1).getNetIncome());
@@ -57,7 +57,7 @@ class SiesmaTestApplicationTests {
 	}
 
 	@Test
-	void testSuperannuationCalculation(){
+	void testSuperannuationCalculation() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 		Assertions.assertEquals(1000.0,employeesWithTax.get(1).getSuperannuation());//asserting superannuation of user 2
@@ -65,14 +65,14 @@ class SiesmaTestApplicationTests {
 	}
 
 	@Test
-	void testFirstName(){
+	void testFirstName() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 		Assertions.assertEquals("Ryan",employeesWithTax.get(1).getFirstName());
 
 	}
 	@Test
-	void testLastName(){
+	void testLastName() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 		Assertions.assertEquals("Chen",employeesWithTax.get(1).getLastName());
@@ -80,7 +80,7 @@ class SiesmaTestApplicationTests {
 	}
 
 	@Test
-	void testOfTheTests(){
+	void testOfTheTests() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		ArrayList<Employee> employeesWithTaxNewCalc = new ArrayList<Employee>();
 		employeesWithTaxNewCalc = newCalcToCalculateTaxOfEmployees(setDummyValuesForTest());
