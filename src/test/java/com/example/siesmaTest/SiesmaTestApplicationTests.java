@@ -38,6 +38,27 @@ class SiesmaTestApplicationTests {
 		Assertions.assertEquals(taxSlabPOJOS,taxSlabPOJOS);
 
 	}
+	@Test
+	void testS3ConnectionTest2() throws IOException, ClassNotFoundException {
+		ArrayList<TaxSlabPOJO> taxSlabPOJOS = TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector());
+
+		Assertions.assertEquals(taxSlabPOJOS.size(),taxSlabPOJOS.size());
+
+	}
+	@Test
+	void testS3ConnectionTest3() throws IOException, ClassNotFoundException {
+		ArrayList<TaxSlabPOJO> taxSlabPOJOS = TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector());
+
+		Assertions.assertNotEquals(taxSlabPOJOS.get(1),taxSlabPOJOS.get(0));
+
+	}
+	@Test
+	void testS3ConnectionTest4() throws IOException, ClassNotFoundException {
+		ArrayList<TaxSlabPOJO> taxSlabPOJOS = TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector());
+
+		Assertions.assertNotEquals(taxSlabPOJOS.size(),0);
+
+	}
 
 
 	@Test
@@ -45,6 +66,14 @@ class SiesmaTestApplicationTests {
 	ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 	employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 	Assertions.assertEquals(2669.0,employeesWithTax.get(1).getIncomeTax());
+
+	}
+
+	@Test
+	void testIncomeTaxCalculationNeg() throws IOException, ClassNotFoundException {
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertNotEquals(-2669.0,employeesWithTax.get(1).getIncomeTax());
 
 	}
 
@@ -72,10 +101,24 @@ class SiesmaTestApplicationTests {
 
 	}
 	@Test
+	void testFirstNameTest2() throws IOException, ClassNotFoundException {
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertEquals("David",employeesWithTax.get(0).getFirstName());
+
+	}
+	@Test
 	void testLastName() throws IOException, ClassNotFoundException {
 		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
 		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
 		Assertions.assertEquals("Chen",employeesWithTax.get(1).getLastName());
+
+	}
+	@Test
+	void testLastNameTest2() throws IOException, ClassNotFoundException {
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertEquals("Rudd",employeesWithTax.get(0).getLastName());
 
 	}
 
@@ -88,6 +131,24 @@ class SiesmaTestApplicationTests {
 		Assertions.assertEquals(employeesWithTax.get(1).getIncomeTax(), employeesWithTaxNewCalc.get(1).getIncomeTax());
 
 	}
+	@Test
+	void testOfTheTests2() throws IOException, ClassNotFoundException {
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		ArrayList<Employee> employeesWithTaxNewCalc = new ArrayList<Employee>();
+		employeesWithTaxNewCalc = newCalcToCalculateTaxOfEmployees(setDummyValuesForTest());
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertEquals(employeesWithTax.get(0).getIncomeTax(), employeesWithTaxNewCalc.get(0).getIncomeTax());
+
+	}
+	@Test
+	void testOfTheTests3() throws IOException, ClassNotFoundException {
+		ArrayList<Employee> employeesWithTax = new ArrayList<Employee>();
+		ArrayList<Employee> employeesWithTaxNewCalc = new ArrayList<Employee>();
+		employeesWithTaxNewCalc = newCalcToCalculateTaxOfEmployees(setDummyValuesForTest());
+		employeesWithTax = restControllerForTest.calculateTaxOfEmployees(setDummyValuesForTest());
+		Assertions.assertTrue(employeesWithTax.get(0).getIncomeTax()!=0);
+
+	}
 
 	private ArrayList<Employee> newCalcToCalculateTaxOfEmployees(ArrayList<Employee> valuesForTest) {
 
@@ -95,7 +156,7 @@ class SiesmaTestApplicationTests {
 		for (Employee emp : valuesForTest
 		) {
 
-			//another way to claculate same would be to start array from 1st index as here and trying to find the slab
+			//another way to calculate same would be to start array from 1st index as here and trying to find the slab
 			//which the individual passes
 			int j = 0;
 			while (emp.getAnnualSalary() > SLAB_LIMIT_ARRAY[j]) {
