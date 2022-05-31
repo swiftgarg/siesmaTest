@@ -17,7 +17,8 @@ public class SiesRestController {
     @ResponseBody
     public ArrayList<Employee> calculateTaxOfEmployees(@RequestBody ArrayList<Employee> emps) throws IOException, ClassNotFoundException {
         SiesmaServiceLayer siesmaServiceLayerObj = new SiesmaServiceLayer();
-        siesmaServiceLayerObj.calculateEmployeeTax(emps);
+        SiesmaS3Connector siesmaS3Connector = new SiesmaS3Connector();
+        siesmaServiceLayerObj.calculateEmployeeTax(emps, TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector()));
         return emps;
     }
 

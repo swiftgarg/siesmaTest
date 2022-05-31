@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 public class SiesmaServiceLayer {
 
-    public void calculateEmployeeTax(ArrayList<Employee> emps) throws IOException, ClassNotFoundException {
+    public void calculateEmployeeTax(ArrayList<Employee> emps, ArrayList<TaxSlabPOJO> taxSlabsATO) throws IOException, ClassNotFoundException {
 
-        SiesmaS3Connector siesmaS3Connector = new SiesmaS3Connector();
+
+
         SiesmaBusinessLogicLayer siesmaBusinessLogicLayerObj = new SiesmaBusinessLogicLayer();
         for (Employee emp: emps
         ) {
-          siesmaBusinessLogicLayerObj.calculateTaxOfEmployee(emp, TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector()));
+          siesmaBusinessLogicLayerObj.calculateTaxOfEmployee(emp, taxSlabsATO);
         }
 
     }
