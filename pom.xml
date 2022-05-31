@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-		<jackson.version>2.4.4</jackson.version>
+		<jackson.version>2.13.2</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.11.529</version>
+			<version>1.12.230</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

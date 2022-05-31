@@ -32,11 +32,10 @@ class SiesmaTestApplicationTests {
 	SiesmaS3Connector siesmaS3Connector = new SiesmaS3Connector();
 
 	@Test
-	void testS3Connection() throws IOException {
-		TaxSlabPOJO s3ObjectJsonUnmarshaller =  siesmaS3Connector.s3Connector();
-		TaxSlabPOJO s3ObjectJsonUnmarshaller2 =  siesmaS3Connector.s3Connector();
-		TaxSlabPOJO s3ObjectJsonUnmarshaller3 =  siesmaS3Connector.s3Connector();
-		Assertions.assertEquals(s3ObjectJsonUnmarshaller,s3ObjectJsonUnmarshaller3);
+	void testS3Connection() throws IOException, ClassNotFoundException {
+		ArrayList<TaxSlabPOJO> taxSlabPOJOS = TaxSlabPOJO.serealizeTaxSlabs(siesmaS3Connector.s3Connector());
+
+		Assertions.assertEquals(taxSlabPOJOS,taxSlabPOJOS);
 
 	}
 

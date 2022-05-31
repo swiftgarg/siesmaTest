@@ -12,15 +12,17 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class SiesmaS3Connector {
 
 
-
-    public TaxSlabPOJO s3Connector() throws IOException {
+    public String s3Connector() throws IOException, ClassNotFoundException {
         AWSCredentials credentials = null;
         try {
             credentials = new ProfileCredentialsProvider().getCredentials();
@@ -37,11 +39,8 @@ public class SiesmaS3Connector {
                 .withRegion("us-west-2")
                 .build();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        S3Object s3Object = s3.getObject(new GetObjectRequest("siesmataxslabs", "taxSlabs.json"));
-        TaxSlabPOJO taxSlabPOJO = objectMapper.readValue(s3Object.getObjectContent(), TaxSlabPOJO.class);
+        String s3ObjectAsString = s3.getObjectAsString("siesmataxslabs", "taxSlabs.json");
 
-
-        return taxSlabPOJO;
+        return s3ObjectAsString;
     }
 }
